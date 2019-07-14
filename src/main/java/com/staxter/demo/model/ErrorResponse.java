@@ -12,14 +12,6 @@ public class ErrorResponse {
         this.message = message;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
     public static ErrorResponse userAlreadyExists() {
         return new ErrorResponse("USER_ALREADY_EXISTS", "A user with given username already exists");
     }
