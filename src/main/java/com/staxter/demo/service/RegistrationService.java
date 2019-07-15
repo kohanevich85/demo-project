@@ -20,7 +20,7 @@ public class RegistrationService {
 
     public User registerUser(UserRegistration userRegistration) {
         User user = create(userRegistration);
-        String encodedPassword = passwordHashService.encode(userRegistration.getPassword());
+        String encodedPassword = passwordHashService.hashPassword(userRegistration.getPassword());
         user.setHashedPassword(encodedPassword);
 
         return userRepository.createUser(user);

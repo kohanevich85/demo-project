@@ -1,5 +1,6 @@
 package com.staxter.demo;
 
+import com.staxter.demo.model.UserRegistration;
 import com.staxter.demo.service.RegistrationService;
 import com.staxter.demo.userrepository.UserMemoryRepository;
 import org.junit.After;
@@ -19,6 +20,11 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
         webEnvironment = RANDOM_PORT,
         classes = DemoApplication.class)
 public abstract class AbstractTest {
+
+    protected static final String FIRST_NAME = "firstName";
+    protected static final String LAST_NAME = "lastName";
+    protected static final String USER_NAME = "userName";
+    protected static final String PASSWORD = "Password";
 
     @Resource
     private TestRestTemplate restTemplate;
@@ -45,5 +51,14 @@ public abstract class AbstractTest {
     @After
     public void tearDown() {
         userMemoryRepository.setUsers(new HashMap<>());
+    }
+
+    protected static UserRegistration givenUser() {
+        UserRegistration user = new UserRegistration();
+        user.setFirstName(FIRST_NAME);
+        user.setLastName(LAST_NAME);
+        user.setUserName(USER_NAME);
+        user.setPassword(PASSWORD);
+        return user;
     }
 }

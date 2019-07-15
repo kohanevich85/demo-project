@@ -4,16 +4,16 @@ import com.staxter.demo.exception.UserAlreadyExistsException;
 import com.staxter.demo.model.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Optional.ofNullable;
 
 @Repository
 public class UserMemoryRepository implements UserRepository {
 
-    private Map<String, User> users = new HashMap<>();
+    private Map<String, User> users = new ConcurrentHashMap<>();
 
     @Override
     public User createUser(User user) throws UserAlreadyExistsException {

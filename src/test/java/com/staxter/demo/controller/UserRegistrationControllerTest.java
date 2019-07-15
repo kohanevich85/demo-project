@@ -18,10 +18,6 @@ import static org.springframework.http.HttpStatus.OK;
 public class UserRegistrationControllerTest extends AbstractTest {
 
     private static final String REGISTRATION_SERVICE = "/userservice/register";
-    private static final String FIRST_NAME = "firstName";
-    private static final String LAST_NAME = "lastName";
-    private static final String USER_NAME = "userName";
-    private static final String PASSWORD = "Password";
     private static final int REGISTRATION_ID = 1;
 
     @Test
@@ -51,14 +47,6 @@ public class UserRegistrationControllerTest extends AbstractTest {
         getRegistrationService().registerUser(givenUser());
     }
 
-    private static UserRegistration givenUser() {
-        UserRegistration user = new UserRegistration();
-        user.setFirstName(FIRST_NAME);
-        user.setLastName(LAST_NAME);
-        user.setUserName(USER_NAME);
-        user.setPassword(PASSWORD);
-        return user;
-    }
 
     private static User expectedRegisteredUser() {
         User user = new User();

@@ -12,12 +12,14 @@ import javax.annotation.Resource;
 @Service
 public class AuthenticationService {
 
-
     @Resource
     private PasswordHashService passwordHashService;
 
     @Resource
     private UserRepository userRepository;
+
+    @Resource
+    private JwtTokenService jwtTokenService;
 
     public LoginResponse loginUser(UserLogin user) {
         User existingUser = userRepository.findByUserName(user.getUserName())
@@ -26,11 +28,11 @@ public class AuthenticationService {
         if (!isValidPassword(user, existingUser)) {
             throw new WrongUserCredentialsException("User doesn't exist with user name: " + user.getUserName());
         }
-        return new LoginResponse();
+        String token = jwtTokenService.generateToken(existingUser.getId());
+        return new LoginResponse(token);
     }
 
     private boolean isValidPassword(UserLogin user, User existingUser) {
-        String passwordExistingUser = passwordHashService.decode(existingUser.getHashedPassword());
-        return user.getPassword().equals(passwordExistingUser);
+        return passwordHashService.verifyPassword(user.getPassword(), existingUser.getHashedPassword());
     }
 }
