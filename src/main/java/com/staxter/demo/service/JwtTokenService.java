@@ -23,6 +23,9 @@ public class JwtTokenService {
     @Value("${jwt.security.token.expiration.minutes}")
     private Integer expirationMinutes;
 
+    /**
+     * Assumed generated token stored and validated in security filter
+     */
     public String generateToken(Integer id) {
         Date expiresAt = from(now()
                 .plusMinutes(expirationMinutes)
